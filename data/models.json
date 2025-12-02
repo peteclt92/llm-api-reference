@@ -1,9 +1,9 @@
 [
     {
-        "id": "gpt-5",
+        "id": "gpt-5.1",
         "provider": "OpenAI",
-        "model_name": "GPT-5",
-        "api_string": "gpt-5",
+        "model_name": "GPT-5.1",
+        "api_string": "gpt-5.1",
         "pricing": {
             "input_per_1m": 1.25,
             "output_per_1m": 10.00
@@ -271,7 +271,7 @@
             "input_per_1m": 0.50,
             "output_per_1m": 1.50
         },
-        "context_window": 262144,
+        "context_window": 256000,
         "capabilities": [
             "Open-weight",
             "Multimodal",
@@ -300,6 +300,25 @@
         "last_verified": "2025-12-02",
         "status": "active",
         "description": "Cutting-edge language model optimized specifically for coding tasks."
+    },
+    {
+        "id": "mistral-small-3.2",
+        "provider": "Mistral",
+        "model_name": "Mistral Small 3.2",
+        "api_string": "mistral-small-latest",
+        "pricing": {
+            "input_per_1m": 0.20,
+            "output_per_1m": 0.60
+        },
+        "context_window": 128000,
+        "capabilities": [
+            "Fast",
+            "Efficient",
+            "Cost-effective"
+        ],
+        "last_verified": "2025-12-02",
+        "status": "active",
+        "description": "Updated small model balancing performance and efficiency."
     },
     {
         "id": "command-a",
@@ -380,25 +399,5 @@
         "last_verified": "2025-12-02",
         "status": "active",
         "description": "Thinking mode with extended output and reasoning capabilities."
-    },
-    {
-        "id": "llama-4-maverick",
-        "provider": "Meta",
-        "model_name": "Llama 4 Maverick",
-        "api_string": "llama-4-maverick",
-        "pricing": {
-            "input_per_1m": 0.27,
-            "output_per_1m": 0.85
-        },
-        "context_window": 1000000,
-        "capabilities": [
-            "Open-weight",
-            "Long Context",
-            "Summarization",
-            "Coding"
-        ],
-        "last_verified": "2025-12-02",
-        "status": "active",
-        "description": "400B parameter model with 1M token context optimized for discussion, summarization, and coding."
     }
 ]

@@ -108,8 +108,8 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                         key={cap}
                         onClick={() => toggleCapability(cap)}
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors ${selectedCapabilities.includes(cap)
-                                ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-                                : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                            ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                            : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
                             }`}
                     >
                         {cap}
@@ -120,7 +120,14 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
             <div className="flex items-center gap-4 text-xs text-zinc-400 dark:text-zinc-500 pt-4 border-t border-zinc-100 dark:border-zinc-800">
                 <div className="flex items-center gap-1">
                     <Calendar size={12} />
-                    <span>Verified {model.last_verified}</span>
+                    <a
+                        href="https://github.com/peteclt92/llm-api-reference/blob/master/data/models.json"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                    >
+                        Verified {model.last_verified}
+                    </a>
                 </div>
             </div>
 

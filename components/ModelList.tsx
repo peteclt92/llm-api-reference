@@ -24,7 +24,7 @@ export function ModelList({ models }: ModelListProps) {
 
     const providers = useMemo(() => {
         const uniqueProviders = Array.from(new Set(models.map((m) => m.provider)));
-        return ["all", ...uniqueProviders.sort()];
+        return uniqueProviders.sort();
     }, [models]);
 
     const filteredModels = useMemo(() => {
