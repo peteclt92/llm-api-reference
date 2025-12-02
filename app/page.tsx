@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { ModelList } from "@/components/ModelList";
 import modelsData from "@/data/models.json";
 import { Model } from "@/lib/types";
+import { Suspense } from "react";
 
 // Ensure data matches the type
 const models: Model[] = modelsData as Model[];
@@ -21,7 +22,9 @@ export default function Home() {
           </p>
         </div>
 
-        <ModelList models={models} />
+        <Suspense fallback={<div className="text-center py-12 text-zinc-500 dark:text-zinc-400">Loading models...</div>}>
+          <ModelList models={models} />
+        </Suspense>
       </main>
 
       <footer className="border-t border-zinc-200 dark:border-zinc-800 mt-12 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
