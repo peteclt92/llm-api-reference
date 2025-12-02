@@ -41,6 +41,68 @@
         "description": "Cost-effective GPT-5 variant optimized for performance and speed."
     },
     {
+        "id": "gpt-5.1-codex",
+        "provider": "OpenAI",
+        "model_name": "GPT-5.1-Codex",
+        "api_string": "gpt-5.1-codex",
+        "pricing": {
+            "input_per_1m": 1.25,
+            "output_per_1m": 10.00
+        },
+        "context_window": 400000,
+        "capabilities": [
+            "Agentic Coding",
+            "Long Context",
+            "Multimodal",
+            "Tool Use",
+            "Reasoning"
+        ],
+        "last_verified": "2025-11-13",
+        "status": "active",
+        "description": "Specialized model tuned for software engineering and agentic coding workflows with 400K context."
+    },
+    {
+        "id": "gpt-5.1-codex-max",
+        "provider": "OpenAI",
+        "model_name": "GPT-5.1-Codex-Max",
+        "api_string": "gpt-5.1-codex-max",
+        "pricing": {
+            "input_per_1m": 1.25,
+            "output_per_1m": 10.00
+        },
+        "context_window": 400000,
+        "capabilities": [
+            "Frontier Agentic Coding",
+            "Long-horizon Workflows",
+            "Advanced Reasoning",
+            "Repository-scale Refactoring"
+        ],
+        "last_verified": "2025-11-19",
+        "status": "active",
+        "description": "High-capability variant designed for very long-running engineering tasks (multi-hour to 24h+)."
+    },
+    {
+        "id": "gpt-5.1-codex-mini",
+        "provider": "OpenAI",
+        "model_name": "GPT-5.1-Codex-Mini",
+        "api_string": "gpt-5.1-codex-mini",
+        "pricing": {
+            "input_per_1m": 0.25,
+            "output_per_1m": 2.00
+        },
+        "context_window": 400000,
+        "capabilities": [
+            "Fast",
+            "Cost-effective",
+            "Multimodal",
+            "Linting",
+            "Low Latency"
+        ],
+        "last_verified": "2025-11-13",
+        "status": "active",
+        "description": "Compact, cost-optimized version targeting lightweight coding workflows like linting and formatting."
+    },
+    {
         "id": "gpt-4.1",
         "provider": "OpenAI",
         "model_name": "GPT-4.1",
