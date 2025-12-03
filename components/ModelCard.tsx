@@ -156,10 +156,10 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                     <button
                         key={cap}
                         onClick={() => toggleCapability(cap)}
-                        className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium transition - colors ${selectedCapabilities.includes(cap)
-                                ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-                                : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                            } `}
+                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors ${selectedCapabilities.includes(cap)
+                            ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                            : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                            }`}
                     >
                         {cap}
                     </button>
