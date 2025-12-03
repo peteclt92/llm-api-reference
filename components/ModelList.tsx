@@ -5,6 +5,7 @@ import { Model } from "@/lib/types";
 import { ModelCard } from "./ModelCard";
 import { Search, Filter, X } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { FadeIn } from "./FadeIn";
 
 interface ModelListProps {
     models: Model[];
@@ -62,7 +63,7 @@ export function ModelList({ models }: ModelListProps) {
     };
 
     return (
-        <div>
+        <div className="space-y-8">
             <div className="flex flex-col md:flex-row gap-4 mb-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
@@ -115,16 +116,12 @@ export function ModelList({ models }: ModelListProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredModels.map((model, index) => (
-                    <div
-                        key={model.id}
-                        className="animate-fade-in-up"
-                        style={{ animationDelay: `${index * 100}ms` }}
-                    >
+                    <FadeIn key={model.id} delay={(index % 3) * 100}>
                         <ModelCard
                             model={model}
                             selectedCapabilities={selectedCapabilities}
                         />
-                    </div>
+                    </FadeIn>
                 ))}
             </div>
 

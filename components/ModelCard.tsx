@@ -3,6 +3,7 @@ import { Copy, Check, Calendar, Box } from "lucide-react";
 import { useState } from "react";
 import { ModelSnippets } from "./ModelSnippets";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTheme } from "./ThemeProvider";
 
 interface ModelCardProps {
     model: Model;
@@ -14,19 +15,25 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     const [isSnippetsOpen, setIsSnippetsOpen] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const { resolvedTheme } = useTheme();
 
     const providerColors: Record<string, string> = {
         OpenAI: "#000000",
         Anthropic: "#d97757",
         Google: "#4285F4",
         Mistral: "#f3c623",
-        Cohere: "#C388E6", // Purple
+        Cohere: "#C388E6",
         Meta: "#0668E1",
         xAI: "#71717a", // Zinc-500
         DeepSeek: "#4e61e6",
     };
 
-    const brandColor = providerColors[model.provider] || "#71717a";
+    const baseBrandColor = providerColors[model.provider] || "#71717a";
+
+    // Adjust OpenAI color in dark mode to be visible
+    const brandColor = (model.provider === "OpenAI" && resolvedTheme === "dark")
+        ? "#52525b" // Zinc-600
+        : baseBrandColor;
 
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
