@@ -11,6 +11,7 @@ interface ModelCardProps {
 
 export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     const [copied, setCopied] = useState(false);
+    const [isSnippetsOpen, setIsSnippetsOpen] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -19,7 +20,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
         Anthropic: "#d97757",
         Google: "#4285F4",
         Mistral: "#f3c623",
-        Cohere: "#00857a",
+        Cohere: "#C388E6", // Purple
         Meta: "#0668E1",
         xAI: "#71717a", // Zinc-500
         DeepSeek: "#4e61e6",
@@ -55,13 +56,13 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
 
     return (
         <div
-            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 transition-all duration-300 hover:-translate-y-1"
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 transition-all duration-500 ease-out"
             style={{
                 boxShadow: "0 0 0 0 transparent",
             }}
             onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 10px 30px -10px ${brandColor}20`;
-                e.currentTarget.style.borderColor = `${brandColor}40`;
+                e.currentTarget.style.boxShadow = `0 20px 40px -10px ${brandColor}15`;
+                e.currentTarget.style.borderColor = `${brandColor}30`;
             }}
             onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = "none";
@@ -72,7 +73,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                 <div>
                     <div className="flex items-center gap-2 mb-1">
                         <div
-                            className="w-2 h-2 rounded-full"
+                            className="w-2 h-2 rounded-full border border-black/5 dark:border-white/10"
                             style={{ backgroundColor: brandColor }}
                         />
                         <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
@@ -157,7 +158,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                 <div className="flex items-center gap-1">
                     <Calendar size={12} />
                     <a
-                        href="https://github.com/peteclt92/llm-api-reference/blob/master/data/models.json"
+                        href={model.source_url || "https://github.com/peteclt92/llm-api-reference/blob/master/data/models.json"}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:underline hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
@@ -167,10 +168,10 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                 </div>
             </div>
 
-            <details className="group mt-4">
+            <details className="group mt-4" onToggle={(e) => setIsSnippetsOpen(e.currentTarget.open)}>
                 <summary className="flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 cursor-pointer select-none">
                     <Box size={16} />
-                    <span>View Code Snippets</span>
+                    <span>{isSnippetsOpen ? "Close Code Snippets" : "View Code Snippets"}</span>
                 </summary>
                 <div className="mt-2">
                     <ModelSnippets model={model} />

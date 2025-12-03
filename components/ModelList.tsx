@@ -114,12 +114,17 @@ export function ModelList({ models }: ModelListProps) {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredModels.map((model) => (
-                    <ModelCard
+                {filteredModels.map((model, index) => (
+                    <div
                         key={model.id}
-                        model={model}
-                        selectedCapabilities={selectedCapabilities}
-                    />
+                        className="animate-in fade-in slide-in-from-bottom-4 duration-500"
+                        style={{ animationDelay: `${index * 50}ms`, animationFillMode: 'backwards' }}
+                    >
+                        <ModelCard
+                            model={model}
+                            selectedCapabilities={selectedCapabilities}
+                        />
+                    </div>
                 ))}
             </div>
 

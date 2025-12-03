@@ -12,5 +12,6 @@ export interface Model {
   last_verified: string;
   status: "active" | "deprecated" | "beta";
   description?: string;
+  source_url?: string;
   release_date?: string;
 }
