@@ -23,7 +23,23 @@ export function ModelList({ models }: ModelListProps) {
         return capabilityParam ? capabilityParam.split(",") : [];
     }, [capabilityParam]);
 
-    const [maxPrice, setMaxPrice] = useState<number>(30);
+    // Calculate minimum price from all models
+    const minModelPrice = useMemo(() => {
+        const prices = models.map(m => m.pricing.output_per_1m);
+        return Math.min(...prices);
+    }, [models]);
+
+    // Calculate maximum price from all models
+    const maxModelPrice = useMemo(() => {
+        const prices = models.map(m => m.pricing.output_per_1m);
+        return Math.max(...prices);
+    }, [models]);
+
+    // Read maxPrice from URL params or default to max model price
+    const maxPriceParam = searchParams.get("maxPrice");
+    const maxPrice = useMemo(() => {
+        return maxPriceParam ? Number(maxPriceParam) : maxModelPrice;
+    }, [maxPriceParam, maxModelPrice]);
 
     const providers = useMemo(() => {
         const uniqueProviders = Array.from(new Set(models.map((m) => m.provider)));
@@ -103,11 +119,11 @@ export function ModelList({ models }: ModelListProps) {
                         </span>
                         <input
                             type="range"
-                            min="0"
-                            max="30"
-                            step="0.5"
+                            min={minModelPrice}
+                            max={maxModelPrice}
+                            step="0.1"
                             value={maxPrice}
-                            onChange={(e) => setMaxPrice(Number(e.target.value))}
+                            onChange={(e) => updateFilter("maxPrice", e.target.value)}
                             className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-zinc-900 dark:accent-zinc-100"
                         />
                     </div>
