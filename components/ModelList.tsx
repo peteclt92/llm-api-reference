@@ -117,8 +117,8 @@ export function ModelList({ models }: ModelListProps) {
                 {filteredModels.map((model, index) => (
                     <div
                         key={model.id}
-                        className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-                        style={{ animationDelay: `${index * 50}ms`, animationFillMode: 'backwards' }}
+                        className="animate-fade-in-up"
+                        style={{ animationDelay: `${index * 100}ms` }}
                     >
                         <ModelCard
                             model={model}
