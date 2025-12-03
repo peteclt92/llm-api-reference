@@ -51,7 +51,7 @@
         },
         "context_window": 400000,
         "capabilities": [
-            "Agentic Coding",
+            "Coding",
             "Long Context",
             "Multimodal",
             "Tool Use",
@@ -72,10 +72,10 @@
         },
         "context_window": 400000,
         "capabilities": [
-            "Frontier Agentic Coding",
-            "Long-horizon Workflows",
-            "Advanced Reasoning",
-            "Repository-scale Refactoring"
+            "Coding",
+            "Long Context",
+            "Reasoning",
+            "Refactoring"
         ],
         "last_verified": "2025-11-19",
         "status": "active",
@@ -92,11 +92,10 @@
         },
         "context_window": 400000,
         "capabilities": [
+            "Coding",
             "Fast",
             "Cost-effective",
-            "Multimodal",
-            "Linting",
-            "Low Latency"
+            "Multimodal"
         ],
         "last_verified": "2025-11-13",
         "status": "active",
@@ -214,10 +213,11 @@
         },
         "context_window": 1048576,
         "capabilities": [
-            "Multimodal",
+            "Coding",
             "Reasoning",
-            "Agentic",
-            "Vibe-coding",
+            "Instruction Following",
+            "Agents",
+            "Multimodal",
             "Vision"
         ],
         "last_verified": "2025-12-02",
