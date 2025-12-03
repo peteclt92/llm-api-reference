@@ -15,7 +15,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     const searchParams = useSearchParams();
 
     const providerColors: Record<string, string> = {
-        OpenAI: "#10a37f",
+        OpenAI: "#000000",
         Anthropic: "#d97757",
         Google: "#4285F4",
         Mistral: "#f3c623",
