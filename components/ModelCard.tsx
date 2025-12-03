@@ -1,6 +1,6 @@
 import { Model } from "@/lib/types";
 import { Copy, Check, Calendar, Box } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ModelSnippets } from "./ModelSnippets";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
@@ -13,9 +13,14 @@ interface ModelCardProps {
 export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     const [copied, setCopied] = useState(false);
     const [isSnippetsOpen, setIsSnippetsOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
     const { resolvedTheme } = useTheme();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const providerColors: Record<string, string> = {
         OpenAI: "#000000",
@@ -30,8 +35,8 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
 
     const baseBrandColor = providerColors[model.provider] || "#71717a";
 
-    // Adjust OpenAI color in dark mode to be visible
-    const brandColor = (model.provider === "OpenAI" && resolvedTheme === "dark")
+    // Adjust OpenAI color in dark mode to be visible, but only after mount
+    const brandColor = (mounted && model.provider === "OpenAI" && resolvedTheme === "dark")
         ? "#52525b" // Zinc-600
         : baseBrandColor;
 
@@ -58,7 +63,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
             params.delete("capability");
         }
 
-        router.replace(`?${params.toString()}`);
+        router.replace(`? ${params.toString()} `);
     };
 
     return (
@@ -68,8 +73,8 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                 boxShadow: "0 0 0 0 transparent",
             }}
             onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 20px 40px -10px ${brandColor}15`;
-                e.currentTarget.style.borderColor = `${brandColor}30`;
+                e.currentTarget.style.boxShadow = `0 20px 40px - 10px ${brandColor} 15`;
+                e.currentTarget.style.borderColor = `${brandColor} 30`;
             }}
             onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = "none";
@@ -90,7 +95,7 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                             <span
                                 className="px-2 py-0.5 text-[10px] font-medium rounded-full"
                                 style={{
-                                    backgroundColor: `${brandColor}15`,
+                                    backgroundColor: `${brandColor} 15`,
                                     color: brandColor
                                 }}
                             >
@@ -151,10 +156,10 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
                     <button
                         key={cap}
                         onClick={() => toggleCapability(cap)}
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors ${selectedCapabilities.includes(cap)
-                            ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-                            : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                            }`}
+                        className={`inline - flex items - center px - 2.5 py - 0.5 rounded - full text - xs font - medium transition - colors ${selectedCapabilities.includes(cap)
+                                ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                                : "bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                            } `}
                     >
                         {cap}
                     </button>
