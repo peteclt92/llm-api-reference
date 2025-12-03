@@ -14,6 +14,19 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const providerColors: Record<string, string> = {
+        OpenAI: "#10a37f",
+        Anthropic: "#d97757",
+        Google: "#4285F4",
+        Mistral: "#f3c623",
+        Cohere: "#00857a",
+        Meta: "#0668E1",
+        xAI: "#71717a", // Zinc-500
+        DeepSeek: "#4e61e6",
+    };
+
+    const brandColor = providerColors[model.provider] || "#71717a";
+
     const copyToClipboard = (text: string) => {
         navigator.clipboard.writeText(text);
         setCopied(true);
@@ -41,15 +54,38 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
     };
 
     return (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 hover:shadow-md transition-shadow">
+        <div
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 transition-all duration-300 hover:-translate-y-1"
+            style={{
+                boxShadow: "0 0 0 0 transparent",
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = `0 10px 30px -10px ${brandColor}20`;
+                e.currentTarget.style.borderColor = `${brandColor}40`;
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "";
+            }}
+        >
             <div className="flex justify-between items-start mb-4">
                 <div>
                     <div className="flex items-center gap-2 mb-1">
+                        <div
+                            className="w-2 h-2 rounded-full"
+                            style={{ backgroundColor: brandColor }}
+                        />
                         <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                             {model.provider}
                         </span>
                         {model.status === "beta" && (
-                            <span className="px-2 py-0.5 text-[10px] font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                            <span
+                                className="px-2 py-0.5 text-[10px] font-medium rounded-full"
+                                style={{
+                                    backgroundColor: `${brandColor}15`,
+                                    color: brandColor
+                                }}
+                            >
                                 BETA
                             </span>
                         )}
