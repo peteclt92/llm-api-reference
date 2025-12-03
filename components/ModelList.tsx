@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Model } from "@/lib/types";
 import { ModelCard } from "./ModelCard";
 import { Search, Filter, X } from "lucide-react";
@@ -23,6 +23,8 @@ export function ModelList({ models }: ModelListProps) {
         return capabilityParam ? capabilityParam.split(",") : [];
     }, [capabilityParam]);
 
+    const [maxPrice, setMaxPrice] = useState<number>(30);
+
     const providers = useMemo(() => {
         const uniqueProviders = Array.from(new Set(models.map((m) => m.provider)));
         return uniqueProviders.sort();
@@ -43,9 +45,11 @@ export function ModelList({ models }: ModelListProps) {
                 selectedCapabilities.length === 0 ||
                 selectedCapabilities.every(cap => model.capabilities.includes(cap));
 
-            return matchesSearch && matchesProvider && matchesCapabilities;
+            const matchesPrice = model.pricing.output_per_1m <= maxPrice;
+
+            return matchesSearch && matchesProvider && matchesCapabilities && matchesPrice;
         });
-    }, [models, search, selectedProvider, selectedCapabilities]);
+    }, [models, search, selectedProvider, selectedCapabilities, maxPrice]);
 
     const updateFilter = (key: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -64,8 +68,8 @@ export function ModelList({ models }: ModelListProps) {
 
     return (
         <div className="space-y-8">
-            <div className="flex flex-col md:flex-row gap-4 mb-4">
-                <div className="relative flex-1">
+            <div className="flex flex-col md:flex-row gap-4 mb-4 items-center">
+                <div className="relative flex-1 w-full">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
                     <input
                         type="text"
@@ -75,20 +79,38 @@ export function ModelList({ models }: ModelListProps) {
                         className="w-full pl-10 pr-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
                     />
                 </div>
-                <div className="relative min-w-[200px]">
-                    <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                    <select
-                        value={selectedProvider}
-                        onChange={(e) => updateFilter("provider", e.target.value)}
-                        className="w-full pl-10 pr-8 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer"
-                    >
-                        <option value="all">All Providers</option>
-                        {providers.map((provider) => (
-                            <option key={provider} value={provider}>
-                                {provider}
-                            </option>
-                        ))}
-                    </select>
+
+                <div className="flex gap-4 w-full md:w-auto flex-wrap md:flex-nowrap">
+                    <div className="relative min-w-[180px] w-full md:w-auto">
+                        <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                        <select
+                            value={selectedProvider}
+                            onChange={(e) => updateFilter("provider", e.target.value)}
+                            className="w-full pl-10 pr-8 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer"
+                        >
+                            <option value="all">All Providers</option>
+                            {providers.map((provider) => (
+                                <option key={provider} value={provider}>
+                                    {provider}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="flex items-center gap-3 px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
+                        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
+                            Max Output: <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
+                        </span>
+                        <input
+                            type="range"
+                            min="0"
+                            max="30"
+                            step="0.5"
+                            value={maxPrice}
+                            onChange={(e) => setMaxPrice(Number(e.target.value))}
+                            className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-zinc-900 dark:accent-zinc-100"
+                        />
+                    </div>
                 </div>
             </div>
 

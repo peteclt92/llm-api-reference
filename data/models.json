@@ -156,7 +156,7 @@
             "input_per_1m": 5.00,
             "output_per_1m": 25.00
         },
-        "source_url": "https://www.anthropic.com/pricing",
+        "source_url": "https://claude.com/pricing#api",
         "context_window": 200000,
         "capabilities": [
             "Reasoning",
@@ -228,8 +228,7 @@
             "Reasoning",
             "Instruction Following",
             "Agents",
-            "Multimodal",
-            "Vision"
+            "Multimodal"
         ],
         "last_verified": "2025-12-02",
         "status": "beta",
@@ -314,7 +313,7 @@
             "Reasoning",
             "Function Calling",
             "Structured Outputs",
-            "Vision"
+            "Multimodal"
         ],
         "last_verified": "2025-12-02",
         "status": "active",
@@ -354,8 +353,7 @@
         "capabilities": [
             "Open-weight",
             "Multimodal",
-            "General Purpose",
-            "Vision"
+            "General Purpose"
         ],
         "last_verified": "2025-12-02",
         "status": "active",
