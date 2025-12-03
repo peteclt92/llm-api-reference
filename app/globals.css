@@ -34,3 +34,53 @@ body {
   animation: fadeInUp 0.5s ease-out forwards;
   opacity: 0;
 }
+
+/* Range slider thumb styling */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #18181b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #18181b;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  background: #4f46e5;
+  transform: scale(1.2);
+}
+
+input[type="range"]:active::-moz-range-thumb {
+  background: #4f46e5;
+  transform: scale(1.2);
+}
+
+.dark input[type="range"]::-webkit-slider-thumb {
+  background: #f4f4f5;
+}
+
+.dark input[type="range"]::-moz-range-thumb {
+  background: #f4f4f5;
+}
+
+.dark input[type="range"]:active::-webkit-slider-thumb {
+  background: #818cf8;
+  transform: scale(1.2);
+}
+
+.dark input[type="range"]:active::-moz-range-thumb {
+  background: #818cf8;
+  transform: scale(1.2);
+}

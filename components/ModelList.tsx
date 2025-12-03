@@ -115,7 +115,7 @@ export function ModelList({ models }: ModelListProps) {
 
                     <div className="flex items-center gap-3 px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
                         <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
-                            Max Output: <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
+                            Max Price (1M): <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
                         </span>
                         <input
                             type="range"
