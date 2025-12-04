@@ -10,7 +10,7 @@ export function Header() {
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2 font-bold text-xl text-zinc-900 dark:text-zinc-100">
                     <Terminal className="w-6 h-6" />
-                    <span>LLM Reference</span>
+                    <span className="hidden sm:inline">LLM Reference</span>
                 </Link>
                 <nav className="flex items-center gap-6">
                     <Link
