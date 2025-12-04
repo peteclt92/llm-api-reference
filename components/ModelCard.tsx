@@ -8,9 +8,11 @@ import { useTheme } from "./ThemeProvider";
 interface ModelCardProps {
     model: Model;
     selectedCapabilities: string[];
+    isSelected?: boolean;
+    onSelect?: (selected: boolean) => void;
 }
 
-export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
+export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }: ModelCardProps) {
     const [copied, setCopied] = useState(false);
     const [isSnippetsOpen, setIsSnippetsOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -82,8 +84,20 @@ export function ModelCard({ model, selectedCapabilities }: ModelCardProps) {
             }}
         >
             <div className="flex justify-between items-start mb-4">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-3">
+                    {/* Comparison Checkbox */}
+                    {onSelect && (
+                        <div className="relative flex items-center">
+                            <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => onSelect(e.target.checked)}
+                                className="peer h-5 w-5 rounded border-zinc-300 dark:border-zinc-600 text-indigo-600 focus:ring-indigo-600 dark:bg-zinc-800 cursor-pointer transition-all"
+                            />
+                        </div>
+                    )}
+
+                    <div className="flex items-center gap-2">
                         <div
                             className="w-2 h-2 rounded-full border border-black/5 dark:border-white/10"
                             style={{ backgroundColor: brandColor }}

@@ -1,37 +1,46 @@
-import { Header } from "@/components/Header";
+import { Suspense } from "react";
 import { ModelList } from "@/components/ModelList";
+import { Header } from "@/components/Header";
+import { ModelCardSkeleton } from "@/components/ModelCardSkeleton";
 import modelsData from "@/data/models.json";
 import { Model } from "@/lib/types";
-import { Suspense } from "react";
 
-// Ensure data matches the type
-const models: Model[] = modelsData as Model[];
+// Force dynamic rendering since we use searchParams
+export const dynamic = "force-dynamic";
+
+function LoadingState() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[...Array(6)].map((_, i) => (
+        <ModelCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
+  const models = modelsData as Model[];
+
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
       <Header />
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto mb-12 text-center">
-          <h1 className="text-4xl font-bold mb-4 tracking-tight">
-            LLM API Reference
-          </h1>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
-            The definitive reference for top LLM API models.
-            Always up-to-date model names, pricing, and capabilities.
-          </p>
+      <main className="container mx-auto px-4 py-8 md:py-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12 text-center space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              LLM API Reference
+            </h1>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+              A comprehensive reference for the latest Large Language Models,
+              comparing pricing, capabilities, and context windows.
+            </p>
+          </div>
+
+          <Suspense fallback={<LoadingState />}>
+            <ModelList models={models} />
+          </Suspense>
         </div>
-
-        <Suspense fallback={<div className="text-center py-12 text-zinc-500 dark:text-zinc-400">Loading models...</div>}>
-          <ModelList models={models} />
-        </Suspense>
       </main>
-
-      <footer className="border-t border-zinc-200 dark:border-zinc-800 mt-12 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
-        <p>
-          Data updated weekly. Last check: {new Date().toLocaleDateString()}
-        </p>
-      </footer>
     </div>
   );
 }
