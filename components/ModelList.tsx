@@ -8,6 +8,7 @@ import { ModelCard } from "./ModelCard";
 import { Search, Filter, X } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { FadeIn } from "./FadeIn";
+import { Select } from "./ui/Select";
 
 interface ModelListProps {
     models: Model[];
@@ -106,75 +107,73 @@ export function ModelList({ models }: ModelListProps) {
 
     return (
         <div className="space-y-8">
-            <div className="flex flex-col gap-4 mb-4">
-                {/* Top Row: Search */}
-                <div className="relative w-full">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                    <input
-                        type="text"
-                        placeholder="Search models..."
-                        value={search}
-                        onChange={(e) => updateFilter("search", e.target.value)}
-                        className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all shadow-sm"
-                    />
-                    {search && (
-                        <button
-                            onClick={() => updateFilter("search", "")}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full bg-zinc-200/50 dark:bg-zinc-700/50 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 transition-colors"
-                        >
-                            <X size={14} />
-                        </button>
-                    )}
-                </div>
-
-                {/* Bottom Row: Filters & Sort */}
-                <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                    <div className="flex gap-4 w-full md:w-auto flex-wrap md:flex-nowrap">
-                        <div className="relative min-w-[180px] w-full md:w-auto">
-                            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                            <select
-                                value={selectedProvider}
-                                onChange={(e) => updateFilter("provider", e.target.value)}
-                                className="w-full pl-10 pr-8 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
+            <div className="sticky top-16 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md py-4 -mx-4 px-4 border-b border-zinc-200/50 dark:border-zinc-800/50 mb-6 transition-all">
+                <div className="flex flex-col gap-4">
+                    {/* Top Row: Search */}
+                    <div className="relative w-full">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                        <input
+                            type="text"
+                            placeholder="Search models..."
+                            value={search}
+                            onChange={(e) => updateFilter("search", e.target.value)}
+                            className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all shadow-sm"
+                        />
+                        {search && (
+                            <button
+                                onClick={() => updateFilter("search", "")}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full bg-zinc-200/50 dark:bg-zinc-700/50 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 transition-colors"
                             >
-                                <option value="all">All Providers</option>
-                                {providers.map((provider) => (
-                                    <option key={provider} value={provider}>
-                                        {provider}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div className="relative min-w-[180px] w-full md:w-auto">
-                            <select
-                                value={sortBy}
-                                onChange={(e) => updateFilter("sort", e.target.value)}
-                                className="w-full px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
-                            >
-                                <option value="recommended">Recommended</option>
-                                <option value="price-low">Price: Low to High</option>
-                                <option value="price-high">Price: High to Low</option>
-                                <option value="context">Context Window</option>
-                                <option value="newest">Newest Added</option>
-                                <option value="name">Name (A-Z)</option>
-                            </select>
-                        </div>
+                                <X size={14} />
+                            </button>
+                        )}
                     </div>
 
-                    <div className="flex items-center gap-3 px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
-                        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
-                            Max Price (1M): <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
-                        </span>
-                        <input
-                            type="range"
-                            min={minModelPrice}
-                            max={maxModelPrice}
-                            step="0.1"
-                            value={maxPrice}
-                            onChange={(e) => updateFilter("maxPrice", e.target.value)}
-                            className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-zinc-900 dark:accent-zinc-100"
-                        />
+                    {/* Bottom Row: Filters & Sort */}
+                    <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                        <div className="flex gap-4 w-full md:w-auto flex-wrap md:flex-nowrap">
+                            <div className="min-w-[180px] w-full md:w-auto">
+                                <Select
+                                    value={selectedProvider}
+                                    onChange={(val) => updateFilter("provider", val)}
+                                    options={[
+                                        { value: "all", label: "All Providers" },
+                                        ...providers.map(p => ({ value: p, label: p }))
+                                    ]}
+                                    icon={<Filter size={14} />}
+                                />
+                            </div>
+
+                            <div className="min-w-[180px] w-full md:w-auto">
+                                <Select
+                                    value={sortBy}
+                                    onChange={(val) => updateFilter("sort", val)}
+                                    options={[
+                                        { value: "recommended", label: "Recommended" },
+                                        { value: "price-low", label: "Price: Low to High" },
+                                        { value: "price-high", label: "Price: High to Low" },
+                                        { value: "context", label: "Context Window" },
+                                        { value: "newest", label: "Newest Added" },
+                                        { value: "name", label: "Name (A-Z)" },
+                                    ]}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
+                            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
+                                Max Price (1M): <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
+                            </span>
+                            <input
+                                type="range"
+                                min={minModelPrice}
+                                max={maxModelPrice}
+                                step="0.1"
+                                value={maxPrice}
+                                onChange={(e) => updateFilter("maxPrice", e.target.value)}
+                                className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-zinc-900 dark:accent-zinc-100"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

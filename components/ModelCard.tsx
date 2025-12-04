@@ -124,13 +124,23 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }:
                     </div>
                 </div>
                 <div className="text-right">
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <div className="text-sm text-zinc-500 dark:text-zinc-400 mb-1">
                         Context
                     </div>
-                    <div className="font-mono font-medium text-zinc-900 dark:text-zinc-100">
+                    <div className="font-mono font-medium text-zinc-900 dark:text-zinc-100 mb-1">
                         {model.context_window >= 1000000
                             ? `${(model.context_window / 1000000).toFixed(0)}M`
                             : `${(model.context_window / 1000).toLocaleString()}k`}
+                    </div>
+                    {/* Context Bar - Max 2M reference */}
+                    <div className="h-1 w-24 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden ml-auto">
+                        <div
+                            className="h-full rounded-full opacity-50"
+                            style={{
+                                width: `${Math.min((model.context_window / 2000000) * 100, 100)}%`,
+                                backgroundColor: brandColor
+                            }}
+                        />
                     </div>
                 </div>
             </div>
@@ -152,19 +162,39 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }:
 
             <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
-                        Input / 1M
+                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1 flex justify-between">
+                        <span>Input / 1M</span>
                     </div>
-                    <div className="font-medium text-zinc-900 dark:text-zinc-100">
+                    <div className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
                         ${model.pricing.input_per_1m.toFixed(2)}
+                    </div>
+                    {/* Price Bar (Input) - Max $10 reference */}
+                    <div className="h-1 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                        <div
+                            className="h-full rounded-full opacity-50"
+                            style={{
+                                width: `${Math.min((model.pricing.input_per_1m / 10) * 100, 100)}%`,
+                                backgroundColor: brandColor
+                            }}
+                        />
                     </div>
                 </div>
                 <div>
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
-                        Output / 1M
+                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1 flex justify-between">
+                        <span>Output / 1M</span>
                     </div>
-                    <div className="font-medium text-zinc-900 dark:text-zinc-100">
+                    <div className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
                         ${model.pricing.output_per_1m.toFixed(2)}
+                    </div>
+                    {/* Price Bar (Output) - Max $30 reference */}
+                    <div className="h-1 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                        <div
+                            className="h-full rounded-full opacity-50"
+                            style={{
+                                width: `${Math.min((model.pricing.output_per_1m / 30) * 100, 100)}%`,
+                                backgroundColor: brandColor
+                            }}
+                        />
                     </div>
                 </div>
             </div>
