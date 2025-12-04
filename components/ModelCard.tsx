@@ -84,10 +84,10 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }:
             }}
         >
             <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-3">
+                <div className="flex gap-3">
                     {/* Comparison Checkbox */}
                     {onSelect && (
-                        <div className="relative flex items-center">
+                        <div className="relative flex items-center pt-0.5">
                             <input
                                 type="checkbox"
                                 checked={isSelected}
@@ -97,29 +97,31 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }:
                         </div>
                     )}
 
-                    <div className="flex items-center gap-2">
-                        <div
-                            className="w-2 h-2 rounded-full border border-black/5 dark:border-white/10"
-                            style={{ backgroundColor: brandColor }}
-                        />
-                        <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                            {model.provider}
-                        </span>
-                        {model.status === "beta" && (
-                            <span
-                                className="px-2 py-0.5 text-[10px] font-medium rounded-full"
-                                style={{
-                                    backgroundColor: `${brandColor} 15`,
-                                    color: brandColor
-                                }}
-                            >
-                                BETA
+                    <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                            <div
+                                className="w-2 h-2 rounded-full border border-black/5 dark:border-white/10"
+                                style={{ backgroundColor: brandColor }}
+                            />
+                            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                                {model.provider}
                             </span>
-                        )}
+                            {model.status === "beta" && (
+                                <span
+                                    className="px-2 py-0.5 text-[10px] font-medium rounded-full"
+                                    style={{
+                                        backgroundColor: `${brandColor}15`,
+                                        color: brandColor
+                                    }}
+                                >
+                                    BETA
+                                </span>
+                            )}
+                        </div>
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                            {model.model_name}
+                        </h3>
                     </div>
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-                        {model.model_name}
-                    </h3>
                 </div>
                 <div className="text-right">
                     <div className="text-sm text-zinc-500 dark:text-zinc-400">

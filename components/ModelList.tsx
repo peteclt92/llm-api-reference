@@ -43,7 +43,7 @@ export function ModelList({ models }: ModelListProps) {
         return maxPriceParam ? Number(maxPriceParam) : maxModelPrice;
     }, [maxPriceParam, maxModelPrice]);
 
-    const [sortBy, setSortBy] = useState<string>("recommended");
+    const sortBy = searchParams.get("sort") || "recommended";
 
     const providers = useMemo(() => {
         const uniqueProviders = Array.from(new Set(models.map((m) => m.provider)));
@@ -91,7 +91,7 @@ export function ModelList({ models }: ModelListProps) {
 
     const updateFilter = (key: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
-        if (value && value !== "all") {
+        if (value && value !== "all" && value !== "recommended") {
             params.set(key, value);
         } else {
             params.delete(key);
@@ -115,8 +115,16 @@ export function ModelList({ models }: ModelListProps) {
                         placeholder="Search models..."
                         value={search}
                         onChange={(e) => updateFilter("search", e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-100 transition-all shadow-sm"
+                        className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all shadow-sm"
                     />
+                    {search && (
+                        <button
+                            onClick={() => updateFilter("search", "")}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full bg-zinc-200/50 dark:bg-zinc-700/50 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 transition-colors"
+                        >
+                            <X size={14} />
+                        </button>
+                    )}
                 </div>
 
                 {/* Bottom Row: Filters & Sort */}
@@ -127,7 +135,7 @@ export function ModelList({ models }: ModelListProps) {
                             <select
                                 value={selectedProvider}
                                 onChange={(e) => updateFilter("provider", e.target.value)}
-                                className="w-full pl-10 pr-8 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
+                                className="w-full pl-10 pr-8 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
                             >
                                 <option value="all">All Providers</option>
                                 {providers.map((provider) => (
@@ -141,8 +149,8 @@ export function ModelList({ models }: ModelListProps) {
                         <div className="relative min-w-[180px] w-full md:w-auto">
                             <select
                                 value={sortBy}
-                                onChange={(e) => setSortBy(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
+                                onChange={(e) => updateFilter("sort", e.target.value)}
+                                className="w-full px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
                             >
                                 <option value="recommended">Recommended</option>
                                 <option value="price-low">Price: Low to High</option>
@@ -154,7 +162,7 @@ export function ModelList({ models }: ModelListProps) {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
+                    <div className="flex items-center gap-3 px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 min-w-[240px] w-full md:w-auto">
                         <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
                             Max Price (1M): <span className="font-mono inline-block min-w-[2.5rem] text-right">${maxPrice}</span>
                         </span>
