@@ -115,7 +115,7 @@ export function ModelList({ models }: ModelListProps) {
                         placeholder="Search models..."
                         value={search}
                         onChange={(e) => updateFilter("search", e.target.value)}
-                        className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all shadow-sm"
+                        className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all shadow-sm"
                     />
                     {search && (
                         <button
@@ -135,7 +135,7 @@ export function ModelList({ models }: ModelListProps) {
                             <select
                                 value={selectedProvider}
                                 onChange={(e) => updateFilter("provider", e.target.value)}
-                                className="w-full pl-10 pr-8 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
+                                className="w-full pl-10 pr-8 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
                             >
                                 <option value="all">All Providers</option>
                                 {providers.map((provider) => (
@@ -150,7 +150,7 @@ export function ModelList({ models }: ModelListProps) {
                             <select
                                 value={sortBy}
                                 onChange={(e) => updateFilter("sort", e.target.value)}
-                                className="w-full px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
+                                className="w-full px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 appearance-none cursor-pointer text-sm"
                             >
                                 <option value="recommended">Recommended</option>
                                 <option value="price-low">Price: Low to High</option>
