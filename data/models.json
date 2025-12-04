@@ -161,7 +161,7 @@
         "capabilities": [
             "Reasoning",
             "Coding",
-            "Agents",
+            "Agentic",
             "Enterprise",
             "Extended Thinking"
         ],
@@ -182,7 +182,7 @@
         "context_window": 200000,
         "capabilities": [
             "Coding",
-            "Agents",
+            "Agentic",
             "Reasoning",
             "Balanced",
             "Extended Thinking"
@@ -227,7 +227,7 @@
             "Coding",
             "Reasoning",
             "Instruction Following",
-            "Agents",
+            "Agentic",
             "Multimodal"
         ],
         "last_verified": "2025-12-02",
@@ -292,7 +292,7 @@
             "Multimodal",
             "Tool Use",
             "Image Generation",
-            "Agents"
+            "Agentic"
         ],
         "last_verified": "2025-12-02",
         "status": "active",
@@ -412,7 +412,7 @@
         "context_window": 256000,
         "capabilities": [
             "Tool Use",
-            "Agents",
+            "Agentic",
             "RAG",
             "Multilingual"
         ],

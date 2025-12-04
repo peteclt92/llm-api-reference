@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { ComparisonBar } from "./ComparisonBar";
 import { ComparisonModal } from "./ComparisonModal";
 import { Model } from "@/lib/types";
@@ -18,6 +18,18 @@ export function ModelList({ models }: ModelListProps) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Show background when scrolled past 100px (roughly when docked to header)
+            setIsScrolled(window.scrollY > 100);
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // Check initial state
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const search = searchParams.get("search") || "";
     const selectedProvider = searchParams.get("provider") || "all";
@@ -107,7 +119,7 @@ export function ModelList({ models }: ModelListProps) {
 
     return (
         <div className="space-y-8">
-            <div className="sticky top-16 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md py-4 -mx-4 px-4 border-b border-zinc-200/50 dark:border-zinc-800/50 mb-6 transition-all">
+            <div className={`sticky top-16 z-40 py-4 -mx-4 px-4 mb-6 transition-all duration-300 ${isScrolled ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50" : ""}`}>
                 <div className="flex flex-col gap-4">
                     {/* Top Row: Search */}
                     <div className="relative w-full">
