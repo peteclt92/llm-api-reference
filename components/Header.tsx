@@ -20,7 +20,7 @@ export function Header() {
                         llms.txt
                     </Link>
                     <a
-                        href="https://github.com"
+                        href="https://github.com/peteclt92/llm-api-reference"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"

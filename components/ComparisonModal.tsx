@@ -26,7 +26,7 @@ export function ComparisonModal({ isOpen, onClose, models }: ComparisonModalProp
     if (!isOpen) return null;
 
     const formatPrice = (price: number) => `$${price.toFixed(2)}`;
-    const formatContext = (ctx: number) => `${(ctx / 1000).toFixed(0)}k`;
+    const formatContext = (ctx: number) => ctx >= 1000000 ? `${(ctx / 1000000).toFixed(0)}M` : `${(ctx / 1000).toFixed(0)}k`;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">

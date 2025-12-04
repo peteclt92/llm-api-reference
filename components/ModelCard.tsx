@@ -128,7 +128,9 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect }:
                         Context
                     </div>
                     <div className="font-mono font-medium text-zinc-900 dark:text-zinc-100">
-                        {(model.context_window / 1000).toLocaleString()}k
+                        {model.context_window >= 1000000
+                            ? `${(model.context_window / 1000000).toLocaleString()}M`
+                            : `${(model.context_window / 1000).toLocaleString()}k`}
                     </div>
                 </div>
             </div>
