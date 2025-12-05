@@ -11,8 +11,8 @@ export function Header() {
     // Animation Configurations
     const range = [0, 50];
 
-    // Border: Transparent to visible theme color
-    const borderOpacity = useTransform(scrollY, range, [0, 1]);
+    // Border: Transparent to visible theme color (very subtle)
+    const borderOpacity = useTransform(scrollY, range, [0, 0.3]);
     const borderColor = useMotionTemplate`rgba(var(--header-border), ${borderOpacity})`;
 
     return (
