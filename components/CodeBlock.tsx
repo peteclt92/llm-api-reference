@@ -18,11 +18,11 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
     };
 
     return (
-        <div className="relative group">
-            <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="relative">
+            <div className="absolute right-2 top-2">
                 <button
                     onClick={copyToClipboard}
-                    className="p-1.5 text-zinc-400 hover:text-zinc-100 bg-zinc-800 rounded-md hover:bg-zinc-700 transition-colors"
+                    className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 bg-white dark:bg-zinc-800 rounded-md border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors shadow-sm"
                     title="Copy Code"
                 >
                     {copied ? <Check size={14} /> : <Copy size={14} />}

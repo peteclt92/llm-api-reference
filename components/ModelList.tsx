@@ -9,6 +9,7 @@ import { Search, Filter, X } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { FadeIn } from "./FadeIn";
 import { Select } from "./ui/Select";
+import { ModelDetailsSheet } from "./ModelDetailsSheet";
 
 interface ModelListProps {
     models: Model[];
@@ -19,6 +20,7 @@ export function ModelList({ models }: ModelListProps) {
     const pathname = usePathname();
     const searchParams = useSearchParams();
     const [isScrolled, setIsScrolled] = useState(false);
+    const [selectedModelForDetails, setSelectedModelForDetails] = useState<Model | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -119,7 +121,8 @@ export function ModelList({ models }: ModelListProps) {
 
     return (
         <div className="space-y-8">
-            <div className={`sticky top-16 z-40 py-4 -mx-4 px-4 mb-6 transition-all duration-300 ${isScrolled ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50" : ""}`}>
+            {/* Desktop Filter Bar (Sticky Top) - Hidden on Mobile */}
+            <div className={`hidden md:block sticky top-16 z-40 py-4 -mx-4 px-4 mb-6 transition-all duration-300 ${isScrolled ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200/50 dark:border-zinc-800/50" : ""}`}>
                 <div className="flex flex-col gap-4">
                     {/* Top Row: Search */}
                     <div className="relative w-full">
@@ -190,6 +193,18 @@ export function ModelList({ models }: ModelListProps) {
                 </div>
             </div>
 
+            {/* Mobile Thumb-Reach Control Island (Fixed Bottom) */}
+            <MobileControlIsland
+                search={search}
+                updateFilter={updateFilter}
+                selectedProvider={selectedProvider}
+                providers={providers}
+                sortBy={sortBy}
+                maxPrice={maxPrice}
+                minModelPrice={minModelPrice}
+                maxModelPrice={maxModelPrice}
+            />
+
             {selectedCapabilities.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 mb-8">
                     <span className="text-sm text-zinc-500 dark:text-zinc-400">Filtering by:</span>
@@ -218,6 +233,7 @@ export function ModelList({ models }: ModelListProps) {
                         <ModelCard
                             model={model}
                             selectedCapabilities={selectedCapabilities}
+                            onShowDetails={() => setSelectedModelForDetails(model)}
                         />
                     </FadeIn>
                 ))}
@@ -228,6 +244,152 @@ export function ModelList({ models }: ModelListProps) {
                     No models found matching your criteria.
                 </div>
             )}
+
+            <ModelDetailsSheet
+                model={selectedModelForDetails}
+                onClose={() => setSelectedModelForDetails(null)}
+            />
+        </div>
+    );
+}
+
+function MobileControlIsland({
+    search,
+    updateFilter,
+    selectedProvider,
+    providers,
+    sortBy,
+    maxPrice,
+    minModelPrice,
+    maxModelPrice
+}: {
+    search: string;
+    updateFilter: (key: string, value: string) => void;
+    selectedProvider: string;
+    providers: string[];
+    sortBy: string;
+    maxPrice: number;
+    minModelPrice: number;
+    maxModelPrice: number;
+}) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Show when scrolling up or at bottom, hide when scrolling down
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setIsVisible(false);
+                setIsExpanded(false); // Auto collapse when scrolling down
+            } else {
+                setIsVisible(true);
+            }
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [lastScrollY]);
+
+    return (
+        <div className={`md:hidden fixed bottom-6 left-4 right-4 z-50 transition-transform duration-300 ${isVisible ? "translate-y-0" : "translate-y-[150%]"}`}>
+            <div
+                className={`bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl rounded-2xl overflow-hidden transition-all duration-300 ease-spring ${isExpanded ? "p-4" : "p-2"}`}
+            >
+                {!isExpanded ? (
+                    // Collapsed Pill State
+                    <div
+                        onClick={() => setIsExpanded(true)}
+                        className="flex items-center justify-between h-12 px-2 cursor-pointer"
+                    >
+                        <div className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400">
+                            <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                                <Search size={20} />
+                            </div>
+                            <span className="font-medium">Search & Filter...</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            {(search || selectedProvider !== 'all') && (
+                                <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                            )}
+                            <div className="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 flex items-center justify-center">
+                                <Filter size={20} />
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    // Expanded State
+                    <div className="space-y-4 animate-in slide-in-from-bottom-4 fade-in duration-200">
+                        <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">Filters</h3>
+                            <button
+                                onClick={() => setIsExpanded(false)}
+                                className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-full text-zinc-500"
+                            >
+                                <X size={16} />
+                            </button>
+                        </div>
+
+                        {/* Search */}
+                        <div className="relative w-full">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                            <input
+                                type="text"
+                                placeholder="Search models..."
+                                value={search}
+                                onChange={(e) => updateFilter("search", e.target.value)}
+                                className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                                autoFocus
+                            />
+                        </div>
+
+                        {/* Filters */}
+                        <div className="grid grid-cols-1 gap-3">
+                            <Select
+                                value={selectedProvider}
+                                onChange={(val) => updateFilter("provider", val)}
+                                options={[
+                                    { value: "all", label: "All Providers" },
+                                    ...providers.map(p => ({ value: p, label: p }))
+                                ]}
+                                icon={<Filter size={14} />}
+                            />
+
+                            <Select
+                                value={sortBy}
+                                onChange={(val) => updateFilter("sort", val)}
+                                options={[
+                                    { value: "recommended", label: "Recommended" },
+                                    { value: "price-low", label: "Price: Low to High" },
+                                    { value: "price-high", label: "Price: High to Low" },
+                                    { value: "context", label: "Context Window" },
+                                    { value: "newest", label: "Newest Added" },
+                                    { value: "name", label: "Name (A-Z)" },
+                                ]}
+                            />
+                        </div>
+
+                        {/* Price Slider */}
+                        <div className="flex items-center gap-3 px-4 h-11 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 w-full">
+                            <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
+                                Max: <span className="font-mono">${maxPrice}</span>
+                            </span>
+                            <input
+                                type="range"
+                                min={minModelPrice}
+                                max={maxModelPrice}
+                                step="0.1"
+                                value={maxPrice}
+                                onChange={(e) => updateFilter("maxPrice", e.target.value)}
+                                className="w-full h-1 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-zinc-900 dark:accent-zinc-100"
+                            />
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

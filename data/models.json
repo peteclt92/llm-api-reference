@@ -73,17 +73,18 @@
             "input_per_1m": 1.25,
             "output_per_1m": 10.00
         },
-        "source_url": "https://openai.com/api/pricing",
+        "source_url": "https://platform.openai.com/docs/models/gpt-5.1-codex-max",
         "context_window": 400000,
         "capabilities": [
             "Coding",
             "Long Context",
             "Reasoning",
+            "Agentic",
             "Refactoring"
         ],
-        "last_verified": "2025-11-19",
+        "last_verified": "2025-12-05",
         "status": "active",
-        "description": "High-capability variant designed for very long-running engineering tasks (multi-hour to 24h+)."
+        "description": "Frontier agentic coding model with 400k context, native compaction, and specialized training for long-horizon software engineering."
     },
     {
         "id": "gpt-5.1-codex-mini",

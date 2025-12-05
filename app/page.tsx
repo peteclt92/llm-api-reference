@@ -22,17 +22,14 @@ export default function Home() {
   const models = modelsData as Model[];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 bg-grid">
       <Header />
       <main className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-              LLM API Reference
-            </h1>
+
             <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-              A comprehensive reference for the latest Large Language Models,
-              comparing pricing, capabilities, and context windows.
+              Filter LLMs by capabilities, compare pricing, and get instant integration code.
             </p>
           </div>
 
