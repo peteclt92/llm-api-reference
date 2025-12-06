@@ -5,6 +5,7 @@ import { ModelSnippets } from "./ModelSnippets";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
 import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from "framer-motion";
+import { HoverActions } from "./HoverActions";
 
 interface ModelCardProps {
     model: Model;
@@ -130,6 +131,10 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, o
 
                 {/* Header / Always Visible Part */}
                 <div className="relative z-10 p-6">
+                    {/* Hover Actions Overlay */}
+                    <div className="absolute top-3 right-3 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200" onClick={(e) => e.stopPropagation()}>
+                        <HoverActions model={model} onAddToCompare={onSelect ? () => onSelect(!isSelected) : undefined} />
+                    </div>
                     {/* Provider Row */}
                     <div className="flex justify-between items-start mb-3">
                         <div className="flex gap-3">

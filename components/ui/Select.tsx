@@ -16,9 +16,10 @@ interface SelectProps {
     placeholder?: string;
     className?: string;
     icon?: React.ReactNode;
+    openDirection?: "up" | "down";
 }
 
-export function Select({ value, onChange, options, placeholder, className = "", icon }: SelectProps) {
+export function Select({ value, onChange, options, placeholder, className = "", icon, openDirection = "down" }: SelectProps) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +56,7 @@ export function Select({ value, onChange, options, placeholder, className = "", 
             </button>
 
             {isOpen && (
-                <div className="absolute z-50 w-full mt-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-xl max-h-60 overflow-auto animate-in fade-in zoom-in-95 duration-100">
+                <div className={`absolute z-50 w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-xl max-h-60 overflow-auto animate-in fade-in zoom-in-95 duration-100 ${openDirection === "up" ? "bottom-full mb-2" : "mt-2"}`}>
                     <div className="p-1">
                         {options.map((option) => (
                             <button

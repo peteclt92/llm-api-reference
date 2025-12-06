@@ -322,7 +322,7 @@ function MobileControlIsland({
                     </div>
                 ) : (
                     // Expanded State
-                    <div className="space-y-4 animate-in slide-in-from-bottom-4 fade-in duration-200">
+                    <div className="space-y-4 animate-in slide-in-from-bottom-4 fade-in duration-200 max-h-[60vh] overflow-y-auto">
                         <div className="flex items-center justify-between mb-2">
                             <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">Filters</h3>
                             <button
@@ -356,6 +356,7 @@ function MobileControlIsland({
                                     ...providers.map(p => ({ value: p, label: p }))
                                 ]}
                                 icon={<Filter size={14} />}
+                                openDirection="up"
                             />
 
                             <Select
@@ -369,6 +370,7 @@ function MobileControlIsland({
                                     { value: "newest", label: "Newest Added" },
                                     { value: "name", label: "Name (A-Z)" },
                                 ]}
+                                openDirection="up"
                             />
                         </div>
 
