@@ -354,7 +354,6 @@ function MobileControlIsland({
                                 value={search}
                                 onChange={(e) => updateFilter("search", e.target.value)}
                                 className="w-full pl-10 pr-10 h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
-                                autoFocus
                             />
                         </div>
 
