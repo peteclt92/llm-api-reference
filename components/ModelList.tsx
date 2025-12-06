@@ -278,12 +278,17 @@ function MobileControlIsland({
 
     useEffect(() => {
         const handleScroll = () => {
+            // Never hide the bar if it's expanded
+            if (isExpanded) {
+                setIsVisible(true);
+                return;
+            }
+
             const currentScrollY = window.scrollY;
 
-            // Show when scrolling up or at bottom, hide when scrolling down
+            // Show when scrolling up or at top, hide when scrolling down
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 setIsVisible(false);
-                setIsExpanded(false); // Auto collapse when scrolling down
             } else {
                 setIsVisible(true);
             }
@@ -292,16 +297,19 @@ function MobileControlIsland({
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
+    }, [lastScrollY, isExpanded]);
+
+    // Always visible when expanded
+    const shouldShow = isVisible || isExpanded;
 
     return (
         // Use larger bottom margin + safe-area for iOS Safari
         <div
-            className={`md:hidden fixed left-4 right-4 z-50 transition-transform duration-300 ${isVisible ? "translate-y-0" : "translate-y-[150%]"}`}
+            className={`md:hidden fixed left-4 right-4 z-50 transition-transform duration-300 ${shouldShow ? "translate-y-0" : "translate-y-[150%]"}`}
             style={{ bottom: 'max(env(safe-area-inset-bottom, 24px), 24px)' }}
         >
             <div
-                className={`bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl rounded-2xl overflow-hidden transition-all duration-300 ease-spring ${isExpanded ? "p-4" : "p-2"}`}
+                className={`bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl rounded-2xl overflow-visible transition-all duration-300 ease-spring ${isExpanded ? "p-4" : "p-2"}`}
             >
                 {!isExpanded ? (
                     // Collapsed Pill State
