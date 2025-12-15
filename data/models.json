@@ -85,7 +85,8 @@
             "Cost-effective",
             "Fast"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-08",
         "status": "active",
         "description": "Cost-effective GPT-5 variant optimized for performance and speed."
     },
@@ -107,7 +108,8 @@
             "Tool Use",
             "Reasoning"
         ],
-        "last_verified": "2025-11-13",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-09",
         "status": "active",
         "description": "Specialized model tuned for software engineering and agentic coding workflows with 400K context."
     },
@@ -129,7 +131,8 @@
             "Agentic",
             "Refactoring"
         ],
-        "last_verified": "2025-12-05",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-09",
         "status": "active",
         "description": "Frontier agentic coding model with 400k context, native compaction, and specialized training for long-horizon software engineering."
     },
@@ -150,7 +153,8 @@
             "Cost-effective",
             "Multimodal"
         ],
-        "last_verified": "2025-11-13",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-09",
         "status": "active",
         "description": "Compact, cost-optimized version targeting lightweight coding workflows like linting and formatting."
     },
@@ -170,7 +174,8 @@
             "Long Context",
             "Instruction Following"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-04",
         "status": "active",
         "description": "Improved instruction following with 1M token context window."
     },
@@ -191,7 +196,8 @@
             "Math",
             "Problem Solving"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-04",
         "status": "active",
         "description": "Advanced reasoning model optimized for science, math, and complex analytical tasks."
     },
@@ -213,7 +219,8 @@
             "Enterprise",
             "Extended Thinking"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-11",
         "status": "active",
         "description": "Premium model combining maximum intelligence with practical performance for enterprise workflows."
     },
@@ -235,7 +242,8 @@
             "Balanced",
             "Extended Thinking"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-09",
         "status": "active",
         "description": "Most intelligent model offering best balance of intelligence, speed, and cost."
     },
@@ -256,7 +264,8 @@
             "Near-frontier Intelligence",
             "Extended Thinking"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-10",
         "status": "active",
         "description": "Fastest model with near-frontier intelligence at the most economical price point."
     },
@@ -324,7 +333,8 @@
             "Long Context",
             "Thinking"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-06",
         "status": "active",
         "description": "State-of-the-art thinking model excelling at complex problems in code, math, and STEM."
     },
@@ -345,7 +355,8 @@
             "Thinking Budgets",
             "Agentic"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-06",
         "status": "active",
         "description": "Best price-performance model with hybrid reasoning and 1M token context window."
     },
@@ -366,7 +377,8 @@
             "Image Generation",
             "Agentic"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-02",
         "status": "active",
         "description": "Workhorse model with native tool use and 1M token context."
     },
@@ -452,7 +464,8 @@
             "Multimodal",
             "General Purpose"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-12",
         "status": "active",
         "description": "State-of-the-art open-weight general-purpose multimodal model."
     },
@@ -472,7 +485,8 @@
             "Code Generation",
             "FIM Completion"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-07",
         "status": "active",
         "description": "Cutting-edge language model optimized specifically for coding tasks."
     },
@@ -492,7 +506,8 @@
             "Efficient",
             "Cost-effective"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-06",
         "status": "active",
         "description": "Updated small model balancing performance and efficiency."
     },
@@ -513,7 +528,8 @@
             "RAG",
             "Multilingual"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-03",
         "status": "active",
         "description": "Most performant model excelling at tool use, agents, RAG, and multilingual tasks."
     },
@@ -534,7 +550,8 @@
             "Problem Solving",
             "Multilingual"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-08",
         "status": "active",
         "description": "First reasoning model capable of 'thinking' before output generation."
     },
@@ -555,7 +572,8 @@
             "Code Completion",
             "Cost-effective"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-12",
         "status": "active",
         "description": "Ultra-low pricing model with 50% cost reduction from previous version."
     },
@@ -576,7 +594,8 @@
             "Tool Use",
             "Cost-effective"
         ],
-        "last_verified": "2025-12-02",
+        "last_verified": "2025-12-15",
+        "release_date": "2025-12",
         "status": "active",
         "description": "Thinking mode with extended output and reasoning capabilities."
     }

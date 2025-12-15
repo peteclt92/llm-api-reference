@@ -13,9 +13,10 @@ interface ModelCardProps {
     isSelected?: boolean;
     onSelect?: (selected: boolean) => void;
     onShowDetails?: () => void;
+    sortBy?: string; // Current sort mode
 }
 
-export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, onShowDetails }: ModelCardProps) {
+export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, onShowDetails, sortBy }: ModelCardProps) {
     const [copied, setCopied] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -158,7 +159,7 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, o
                                 <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                                     {model.provider}
                                 </span>
-                                {model.release_date && (
+                                {(sortBy === "newest" || sortBy === "oldest") && model.release_date && (
                                     <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase">
                                         {model.release_date.replace("-", " / ")}
                                     </span>
@@ -256,7 +257,7 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, o
                                 </div>
 
                                 {/* Detailed Pricing */}
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-3 gap-4">
                                     <div>
                                         <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Input / 1M</div>
                                         <div className="font-medium text-zinc-900 dark:text-zinc-100 text-lg">
@@ -269,6 +270,14 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, o
                                             ${model.pricing.output_per_1m.toFixed(2)}
                                         </div>
                                     </div>
+                                    {model.release_date && (
+                                        <div>
+                                            <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Released</div>
+                                            <div className="font-medium text-zinc-900 dark:text-zinc-100 text-lg">
+                                                {model.release_date.replace("-", " / ")}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Capabilities */}

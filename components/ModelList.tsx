@@ -243,6 +243,7 @@ export function ModelList({ models }: ModelListProps) {
                             model={model}
                             selectedCapabilities={selectedCapabilities}
                             onShowDetails={() => setSelectedModelForDetails(model)}
+                            sortBy={sortBy}
                         />
                     </FadeIn>
                 ))}
