@@ -17,6 +17,9 @@ export async function GET() {
 
         for (const model of providerModels) {
             content += `- ${model.model_name} (${model.api_string})\n`;
+            if (model.release_date) {
+                content += `  - Released: ${model.release_date}\n`;
+            }
             content += `  - Context: ${(model.context_window / 1000).toLocaleString()}k\n`;
             content += `  - Input: $${model.pricing.input_per_1m.toFixed(2)}/1M\n`;
             content += `  - Output: $${model.pricing.output_per_1m.toFixed(2)}/1M\n`;

@@ -158,6 +158,11 @@ export function ModelCard({ model, selectedCapabilities, isSelected, onSelect, o
                                 <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                                     {model.provider}
                                 </span>
+                                {model.release_date && (
+                                    <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 uppercase">
+                                        {model.release_date.replace("-", " / ")}
+                                    </span>
+                                )}
                                 {model.status === "beta" && (
                                     <span
                                         className="px-2 py-0.5 text-[10px] font-medium rounded-full"

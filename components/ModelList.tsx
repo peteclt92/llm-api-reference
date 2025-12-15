@@ -95,7 +95,15 @@ export function ModelList({ models }: ModelListProps) {
                 case "context":
                     return b.context_window - a.context_window;
                 case "newest":
-                    return new Date(b.last_verified).getTime() - new Date(a.last_verified).getTime();
+                    // Sort by release_date (YYYY-MM format), newest first
+                    const aDate = a.release_date || "2020-01";
+                    const bDate = b.release_date || "2020-01";
+                    return bDate.localeCompare(aDate);
+                case "oldest":
+                    // Sort by release_date, oldest first
+                    const aDateOld = a.release_date || "2020-01";
+                    const bDateOld = b.release_date || "2020-01";
+                    return aDateOld.localeCompare(bDateOld);
                 case "name":
                     return a.model_name.localeCompare(b.model_name);
                 default: // "recommended" - keep original order
@@ -168,7 +176,8 @@ export function ModelList({ models }: ModelListProps) {
                                         { value: "price-low", label: "Price: Low to High" },
                                         { value: "price-high", label: "Price: High to Low" },
                                         { value: "context", label: "Context Window" },
-                                        { value: "newest", label: "Newest Added" },
+                                        { value: "newest", label: "Newest First" },
+                                        { value: "oldest", label: "Oldest First" },
                                         { value: "name", label: "Name (A-Z)" },
                                     ]}
                                 />
@@ -378,7 +387,8 @@ function MobileControlIsland({
                                     { value: "price-low", label: "Price: Low to High" },
                                     { value: "price-high", label: "Price: High to Low" },
                                     { value: "context", label: "Context Window" },
-                                    { value: "newest", label: "Newest Added" },
+                                    { value: "newest", label: "Newest First" },
+                                    { value: "oldest", label: "Oldest First" },
                                     { value: "name", label: "Name (A-Z)" },
                                 ]}
                                 openDirection="up"
