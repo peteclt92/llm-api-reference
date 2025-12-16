@@ -21,6 +21,17 @@ export function ModelList({ models }: ModelListProps) {
     const searchParams = useSearchParams();
     const [isScrolled, setIsScrolled] = useState(false);
     const [selectedModelForDetails, setSelectedModelForDetails] = useState<Model | null>(null);
+    const [selectedModels, setSelectedModels] = useState<Model[]>([]);
+    const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+
+    const toggleCompare = (model: Model) => {
+        if (selectedModels.find(m => m.id === model.id)) {
+            setSelectedModels(prev => prev.filter(m => m.id !== model.id));
+        } else {
+            if (selectedModels.length >= 4) return;
+            setSelectedModels(prev => [...prev, model]);
+        }
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -244,6 +255,8 @@ export function ModelList({ models }: ModelListProps) {
                             selectedCapabilities={selectedCapabilities}
                             onShowDetails={() => setSelectedModelForDetails(model)}
                             sortBy={sortBy}
+                            isSelected={!!selectedModels.find(m => m.id === model.id)}
+                            onSelect={() => toggleCompare(model)}
                         />
                     </FadeIn>
                 ))}
@@ -254,6 +267,19 @@ export function ModelList({ models }: ModelListProps) {
                     No models found matching your criteria.
                 </div>
             )}
+
+            <ComparisonBar
+                selectedModels={selectedModels}
+                onRemoveModel={(id) => setSelectedModels(prev => prev.filter(m => m.id !== id))}
+                onClear={() => setSelectedModels([])}
+                onCompare={() => setIsComparisonOpen(true)}
+            />
+
+            <ComparisonModal
+                isOpen={isComparisonOpen}
+                onClose={() => setIsComparisonOpen(false)}
+                models={selectedModels}
+            />
 
             <ModelDetailsSheet
                 model={selectedModelForDetails}

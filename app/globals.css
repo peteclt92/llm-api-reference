@@ -24,11 +24,12 @@ body {
     /* zinc-800 */
   }
 
+  /* Deep Space Dark Gradient Default */
   body {
-    background-color: #09090b;
+    background: linear-gradient(to bottom, #000000, #434343);
+    background-attachment: fixed;
     color: #f4f4f5;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
+    /* Removing the grid pattern background-image from default dark body to fix the "whitish" issue and ensure gradient shows */
   }
 }
 
@@ -38,8 +39,8 @@ body {
 }
 
 .dark body {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background: linear-gradient(to bottom, #000000, #434343);
+  background-attachment: fixed;
 }
 
 .bg-grid {
@@ -51,6 +52,15 @@ body {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+.dark .bg-deep-space {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, #000000, #434343);
+  background-size: 24px 24px, 100% 100%;
+  background-attachment: fixed;
+}
+
 
 @keyframes fadeInUp {
   from {

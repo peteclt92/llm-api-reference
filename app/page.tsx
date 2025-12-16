@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { ModelList } from "@/components/ModelList";
 import { Header } from "@/components/Header";
 import { ModelCardSkeleton } from "@/components/ModelCardSkeleton";
+import { DebugPanel } from "@/components/DebugPanel";
 import modelsData from "@/data/models.json";
 import { Model } from "@/lib/types";
 
@@ -22,7 +23,7 @@ export default function Home() {
   const models = modelsData as Model[];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300 bg-grid">
+    <div data-page-container className="min-h-screen transition-colors duration-300 bg-zinc-50 bg-deep-space">
       <Header />
       <main className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-7xl mx-auto">
@@ -38,6 +39,7 @@ export default function Home() {
           </Suspense>
         </div>
       </main>
+      <DebugPanel />
     </div>
   );
 }
