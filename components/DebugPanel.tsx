@@ -28,7 +28,7 @@ const backgrounds = [
     { id: "gradient-ocean", name: "Ocean", value: "linear-gradient(180deg, #2193b0 0%, #6dd5ed 100%)" },
     { id: "gradient-forest", name: "Forest", value: "linear-gradient(135deg, #134e5e 0%, #71b280 100%)" },
     { id: "gradient-midnight", name: "Midnight (Dark)", value: "linear-gradient(to bottom, #0f2027, #203a43, #2c5364)" },
-    { id: "gradient-space", name: "Deep Space (Dark)", value: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, #000000, #434343)" },
+    { id: "gradient-space", name: "Deep Space (Dark)", value: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(82, 82, 91, 0.5), transparent 50%), radial-gradient(circle at 100% 0%, rgba(113, 113, 122, 0.4), transparent 50%), radial-gradient(circle at 0% 100%, rgba(161, 161, 170, 0.3), transparent 50%), linear-gradient(to bottom, #000000, #000000)" },
     { id: "gradient-aurora", name: "Aurora (Dark)", value: "linear-gradient(to right, #000000, #0f9b0f)" },
     // Images
     { id: "image-meadow", name: "Meadow", value: "url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&q=80')" },
@@ -149,7 +149,9 @@ export function DebugPanel() {
         } else {
             if (pageContainer) {
                 pageContainer.style.background = bg.value;
-                pageContainer.style.backgroundSize = "cover"; // Ensure gradients stretch
+                pageContainer.style.backgroundSize = selectedBg === "gradient-space"
+                    ? "24px 24px, 160% 160%, 140% 140%, 180% 180%, 100% 100%"
+                    : "cover";
                 pageContainer.style.backgroundAttachment = "fixed";
                 // Ensure grid is removed
                 pageContainer.style.backgroundImage = bg.value;
